@@ -1,6 +1,15 @@
-import { createRoot } from "react-dom/client";
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+import TitleBar from "./components/TitleBar";
+import { router } from "./routes/router";
 
-const container = document.getElementById("app");
-const root = createRoot(container);
-
-root.render(<div>app</div>);
+export default function App() {
+  return (
+    <React.StrictMode>
+      <TitleBar />
+      <div className="">
+        <RouterProvider router={router} />
+      </div>
+    </React.StrictMode>
+  );
+}

@@ -26,6 +26,13 @@
  * ```
  */
 
-import "./index.css";
+import "./ui/index.css";
 
-import "./ui/app";
+import { createRoot } from "react-dom/client";
+import { createElement } from "react";
+import App from "./ui/App";
+
+const container = document.getElementById("app");
+const root = createRoot(container);
+
+root.render(createElement(App));
