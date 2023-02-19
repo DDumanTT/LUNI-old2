@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom classes to allow title bar dragging */
+@layer utilities {
+  .region-drag {
+    app-region: drag;
+  }
+
+  .region-no-drag {
+    app-region: no-drag;
+  }
+
+  .overflow-overlay {
+    overflow: overlay;
+  }
+}
+
+/* Custom fonts */
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter.ttf") format("truetype-variations");
+  font-weight: 1 999;
+}
+
+@font-face {
+  font-family: "PressStart2P";
+  src: url("../assets/fonts/PressStart2P.ttf") format("truetype");
+}
+
+/* Scroll bar styling */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+ 
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-900/80 rounded;
+}

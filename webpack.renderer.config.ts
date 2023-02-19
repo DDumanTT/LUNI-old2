@@ -3,6 +3,7 @@ import type { Configuration } from "webpack";
 import { rules } from "./webpack.rules";
 import { plugins } from "./webpack.plugins";
 
+// Css loading
 rules.push({
   test: /\.css$/,
   exclude: /node_modules/,
@@ -18,6 +19,12 @@ rules.push({
       loader: "postcss-loader",
     },
   ],
+});
+
+// Font loading
+rules.push({
+  test: /\.(woff|woff2|eot|ttf|otf)$/i,
+  type: "asset/resource",
 });
 
 export const rendererConfig: Configuration = {

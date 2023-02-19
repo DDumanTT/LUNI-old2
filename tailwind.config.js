@@ -1,8 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/ui/**/*.{html,js,ts,jsx,tsx}"],
+  content: ["./src/ui/**/*.{js,ts,jsx,tsx}", "./src/index.html"],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        pressstart2p: ['PressStart2P', 'sans-serif']
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--gradient-color-stops))',
+      },
+    },
   },
   plugins: [],
 }

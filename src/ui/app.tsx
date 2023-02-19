@@ -7,7 +7,7 @@ export default function App() {
   return (
     <React.StrictMode>
       <TitleBar />
-      <div className="">
+      <div className="overflow-overlay flex-1">
         <RouterProvider router={router} />
       </div>
     </React.StrictMode>

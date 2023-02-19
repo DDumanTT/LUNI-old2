@@ -1,13 +1,28 @@
 import { createMemoryRouter } from "react-router-dom";
-import Main from "./Main";
+
+import MainLayout from "./MainLayout";
+import HomePage from "./HomePage";
+import GamesPage from "./GamesPage";
+import FriendsPage from "./FriendsPage";
+import ErrorPage from "./ErrorPage";
 
 export const router = createMemoryRouter([
   {
-    path: "/",
-    element: <Main />,
-  },
-  {
-    path: "/test",
-    element: <div>testets</div>,
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/games",
+        element: <GamesPage />,
+      },
+      {
+        path: "/friends",
+        element: <FriendsPage />,
+      },
+    ],
+    errorElement: <ErrorPage />,
   },
 ]);

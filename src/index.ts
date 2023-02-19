@@ -16,6 +16,8 @@ Menu.setApplicationMenu(null);
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    height: 800,
+    width: 1200,
     minHeight: 600,
     minWidth: 800,
     frame: false,
@@ -71,3 +73,5 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+import "./api/store.ts";
