@@ -7,10 +7,7 @@ module.exports = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
         pressstart2p: ['PressStart2P', 'sans-serif']
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--gradient-color-stops))',
-      },
+      }
     },
   },
   plugins: [],
