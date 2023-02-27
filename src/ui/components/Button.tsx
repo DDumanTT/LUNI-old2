@@ -1,23 +1,41 @@
-import { HTMLProps } from "react";
+import { ButtonHTMLAttributes, useMemo } from "react";
 
-interface ButtonProps extends HTMLProps<HTMLButtonElement> {
-  type: "primary" | "secondary";
+import {
+  bgColors,
+  importantBgColors,
+  borderColors,
+  textColors,
+} from "../utils/colorMaps";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  color: ComponentColors;
+  important?: boolean;
+  outline?: boolean;
 }
 
 export default function Button(props: ButtonProps) {
-  const { type, children, ...restProps } = props;
+  const { color, important, outline, children, ...restProps } = props;
 
-  const baseClassName = "shadow-md rounded-xl";
+  const className = useMemo(() => {
+    const classes = [
+      "shadow-md",
+      "rounded-md",
+      "px-4",
+      "py-2",
+      textColors[color],
+    ];
 
-  const className = {
-    primary:
-      "rounded-xl bg-blue-500 px-4 py-2 text-slate-200 shadow-md hover:bg-blue-600",
-    secondary:
-      "rounded-xl bg-blue-500 px-4 py-2 text-slate-200 shadow-md hover:bg-blue-600",
-  };
+    if (outline) {
+      classes.push("border-2", borderColors[color]);
+    } else {
+      classes.push(important ? importantBgColors[color] : bgColors[color]);
+    }
+
+    return classes.join(" ");
+  }, [color, important, outline]);
 
   return (
-    <button className={className[type]} {...restProps}>
+    <button className={className} {...restProps}>
       {children}
     </button>
   );

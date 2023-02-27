@@ -41,3 +41,8 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-zinc-900/80 rounded;
 }
+
+/* Other styles */
+html, body, #app {
+  height: 100%;
+}

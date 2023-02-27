@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 
-import { userConfig } from "../atoms";
+import { isFirstStartAtom } from "../atoms";
 
 export default function HomePage() {
-  const [config, setConfig] = useAtom(userConfig);
+  const setIsFirstAtom = useSetAtom(isFirstStartAtom);
 
   return (
     <div>
       <button
         className="border border-black"
-        onClick={() => setConfig({ ...config, firstStart: true })}
+        onClick={() => setIsFirstAtom(true)}
       >
         FIRST START TRUE
       </button>
