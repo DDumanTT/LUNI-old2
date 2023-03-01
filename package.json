@@ -59,6 +59,7 @@
     "jotai": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "registry-js": "^1.15.1"
   }
 }
