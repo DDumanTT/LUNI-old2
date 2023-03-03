@@ -5,9 +5,11 @@ import { enumerateValues, HKEY } from "registry-js";
 import { Directory, Game } from "../types";
 
 export default class Steam implements Directory<Game> {
+  name: string;
   private path?: string;
 
   constructor() {
+    this.name = "steam";
     this.getPath();
   }
 
@@ -32,7 +34,6 @@ export default class Steam implements Directory<Game> {
 
     try {
       let files = await readdir(gamesPath);
-      console.log(files);
       files = files.filter((file) => file.endsWith(".acf"));
       const gamePromises: Promise<Game>[] = [];
 
@@ -42,7 +43,7 @@ export default class Steam implements Directory<Game> {
             readFile(join(gamesPath, file), {
               encoding: "utf-8",
             })
-              .then(this.parseAcf)
+              .then(this.parseAcf.bind(this))
               .then((game) => resolve(game))
               .catch((err) => reject(err));
           })
@@ -61,6 +62,35 @@ export default class Steam implements Directory<Game> {
   }
 
   private parseAcf(content: string): Game {
-    return { id: "test", launcher: "steam", name: "test", path: "test" };
+    const re = /"([^"]+(?="))"\t\t"([^"]+(?="))"/g;
+    const matches = [...content.matchAll(re)];
+
+    if (!matches || !matches.length) throw new Error("Game data not found.");
+    if (!this.path) throw new Error("Steam path not found.");
+
+    const game: Game = {
+      launcher: "steam",
+      id: "",
+      name: "",
+      path: join(this.path, "steamapps", "common"),
+    };
+
+    matches.forEach((match) => {
+      switch (match[1]) {
+        case "appid":
+          game.id = match[2];
+          break;
+        case "name":
+          game.name = match[2];
+          break;
+        case "installdir":
+          game.path = join(game.path, match[2]);
+          break;
+        default:
+          return;
+      }
+    });
+
+    return game;
   }
 }

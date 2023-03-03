@@ -26,6 +26,7 @@
     "@electron-forge/plugin-webpack": "^6.0.5",
     "@radix-ui/colors": "^0.1.8",
     "@tailwindcss/forms": "^0.5.3",
+    "@timfish/forge-externals-plugin": "^0.2.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.52.0",

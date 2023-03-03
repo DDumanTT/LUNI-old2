@@ -2,7 +2,7 @@
 const { toRadixVars } = require("windy-radix-palette/vars");
 
 module.exports = {
-  content: ["./src/ui/**/*.{js,ts,jsx,tsx}", "./src/index.html"],
+  content: ["./src/ui/**/*.{js,ts,jsx,tsx}", "./src/ui/index.html"],
   darkMode: 'class',
   theme: {
     extend: {
@@ -18,6 +18,9 @@ module.exports = {
         warning: toRadixVars('yellow'),
         error: toRadixVars('tomato'),
         info: toRadixVars('cyan'),
+      },
+      transitionProperty: {
+        size: 'width, height',
       }
     },
   },

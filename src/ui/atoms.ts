@@ -3,6 +3,7 @@ import { atomWithStorage } from "jotai/utils";
 type Themes = "light" | "dark" | "system";
 
 type LauncherPaths = {
+  [key: string]: string;
   steam: string;
   epic: string;
   ea: string;
@@ -18,6 +19,9 @@ const initialLauncherPaths: LauncherPaths = {
 
 const isFirstStartAtom = atomWithStorage("isFirstStart", true);
 const themeAtom = atomWithStorage<Themes>("theme", "system");
-const launcherPathsAtom = atomWithStorage("userConfig", initialLauncherPaths);
+const launcherPathsAtom = atomWithStorage(
+  "launcherPaths",
+  initialLauncherPaths
+);
 
 export { isFirstStartAtom, themeAtom, launcherPathsAtom };

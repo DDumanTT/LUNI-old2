@@ -17,8 +17,19 @@ class AbstractScanner<T> implements ContentScanner<T> {
       result.concat(settledPromise.value);
     });
 
+    // console.log(result)
     return result;
   }
+
+  getPaths = (): Record<string, string> => {
+    const paths: Record<string, string> = {};
+    this.directories.forEach((dir) => {
+      const path = dir.getPath();
+      if (!path) return;
+      paths[dir.name] = path;
+    });
+    return paths;
+  };
 
   addDirectory(directory: Directory<T>): void {
     this.directories.push(directory);
@@ -31,6 +42,8 @@ class GameScanner extends AbstractScanner<Game> {
 
     this.addDirectory(new Steam());
   }
+
+  // steam() {}
 }
 
 export { GameScanner };

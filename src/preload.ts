@@ -5,19 +5,26 @@ declare global {
   interface Window {
     controls: typeof controls;
     dialog: typeof dialog;
+    scanner: typeof scanner;
   }
 }
 
 import { contextBridge, ipcRenderer } from "electron";
 
 const controls = {
-  minimize: () => ipcRenderer.send("minimize-window"),
-  fullscreen: () => ipcRenderer.send("fullscreen-window"),
-  close: () => ipcRenderer.send("close-window"),
+  minimize: () => ipcRenderer.send("window:minimize"),
+  fullscreen: () => ipcRenderer.send("window:fullscreen"),
+  close: () => ipcRenderer.send("window:close"),
 };
 contextBridge.exposeInMainWorld("controls", controls);
 
 const dialog = {
-  openDirPicker: () => ipcRenderer.invoke("dialog-open-dir"),
+  openDirPicker: () => ipcRenderer.invoke("dialog:open-dir"),
 };
 contextBridge.exposeInMainWorld("dialog", dialog);
+
+const scanner = {
+  paths: () => ipcRenderer.invoke("games:paths"),
+  steam: () => ipcRenderer.send("games:steam"),
+};
+contextBridge.exposeInMainWorld("scanner", scanner);

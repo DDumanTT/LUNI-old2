@@ -4,6 +4,7 @@ import { MakerZIP } from "@electron-forge/maker-zip";
 import { MakerDeb } from "@electron-forge/maker-deb";
 import { MakerRpm } from "@electron-forge/maker-rpm";
 import { WebpackPlugin } from "@electron-forge/plugin-webpack";
+// import ForgeExternalsPlugin from "@timfish/forge-externals-plugin";
 
 import { mainConfig } from "./webpack.main.config";
 import { rendererConfig } from "./webpack.renderer.config";
@@ -25,7 +26,7 @@ const config: ForgeConfig = {
         config: rendererConfig,
         entryPoints: [
           {
-            html: "./src/index.html",
+            html: "./src/ui/index.html",
             js: "./src/renderer.ts",
             name: "main_window",
             preload: {
@@ -35,6 +36,10 @@ const config: ForgeConfig = {
         ],
       },
     }),
+    // new ForgeExternalsPlugin({
+    //   externals: ["registry-js"],
+    //   includeDeps: true,
+    // }),
   ],
 };
 
