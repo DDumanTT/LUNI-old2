@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { Configuration } from "webpack";
 
 import { rules } from "./webpack.rules";
@@ -14,6 +15,9 @@ export const mainConfig: Configuration = {
   },
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".json"],
+    alias: {
+      "@shared": path.resolve(__dirname, "src/shared"),
+    },
   },
   externals: ["registry-js"],
 };

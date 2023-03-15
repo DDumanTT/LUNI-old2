@@ -1,5 +1,6 @@
 import Steam from "./launchers/Steam";
-import { Directory, Game, ContentScanner } from "./types";
+import { Directory, ContentScanner } from "./types";
+import { Game } from "@shared/types";
 
 class AbstractScanner<T> implements ContentScanner<T> {
   private directories: Directory<T>[] = [];
@@ -14,10 +15,9 @@ class AbstractScanner<T> implements ContentScanner<T> {
 
     (await Promise.allSettled(contentPromises)).forEach((settledPromise) => {
       if (settledPromise.status === "rejected") return;
-      result.concat(settledPromise.value);
+      result.push(...settledPromise.value);
     });
 
-    // console.log(result)
     return result;
   }
 
@@ -31,6 +31,13 @@ class AbstractScanner<T> implements ContentScanner<T> {
     return paths;
   };
 
+  setPaths = (paths: Record<string, string>) => {
+    Object.entries(paths).forEach(([name, path]) => {
+      const dir = this.directories.find((dir) => dir.name === name);
+      if (dir) dir.path = path;
+    });
+  };
+
   addDirectory(directory: Directory<T>): void {
     this.directories.push(directory);
   }
@@ -42,8 +49,6 @@ class GameScanner extends AbstractScanner<Game> {
 
     this.addDirectory(new Steam());
   }
-
-  // steam() {}
 }
 
 export { GameScanner };

@@ -2,7 +2,7 @@ import { atomWithStorage } from "jotai/utils";
 
 type Themes = "light" | "dark" | "system";
 
-type LauncherPaths = {
+export type LauncherPaths = {
   [key: string]: string;
   steam: string;
   epic: string;

@@ -1,12 +1,14 @@
 import { InputHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import * as Label from "@radix-ui/react-label";
+import Icon from "./Icon";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   label?: string;
   before?: ReactNode;
   after?: ReactNode;
+  icon?: ReactNode;
   onCancel?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -21,12 +23,13 @@ export default function Input(props: InputProps) {
     required,
     type,
     className,
+    icon,
     ...restProps
   } = props;
 
   const inputClassName = `w-full rounded-lg border-primary-6 bg-blackA-5 text-primary-12 shadow focus:border-primary-7 focus:ring-primary-7${
     error ? " border-error-6 focus:border-error-7 focus:ring-error-7" : ""
-  }${" " + className}`;
+  }${onCancel ? " pr-10" : ""}${icon ? " pl-10" : ""}${" " + className}`;
 
   return (
     <div className="flex w-full flex-col items-start px-2">
@@ -43,6 +46,17 @@ export default function Input(props: InputProps) {
       <div className="flex w-full flex-1 items-center justify-center gap-2">
         {before}
         <div className="relative w-full">
+          {icon && (
+            <div className="absolute left-5 top-1/2 aspect-square h-full -translate-x-1/2 -translate-y-1/2 p-2">
+              {icon}
+            </div>
+          )}
+          <input
+            className={inputClassName}
+            id={id}
+            type={type || "text"}
+            {...restProps}
+          />
           {onCancel && (
             <button
               className="absolute top-1/2 right-2 -translate-x-1/2 -translate-y-1/2 hover:text-neutral-12"
@@ -51,12 +65,6 @@ export default function Input(props: InputProps) {
               <Cross2Icon />
             </button>
           )}
-          <input
-            className={inputClassName}
-            id={id}
-            type={type || "text"}
-            {...restProps}
-          />
         </div>
         {after}
       </div>

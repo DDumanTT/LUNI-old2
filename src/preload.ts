@@ -10,6 +10,7 @@ declare global {
 }
 
 import { contextBridge, ipcRenderer } from "electron";
+import { LauncherPaths } from "./ui/atoms";
 
 const controls = {
   minimize: () => ipcRenderer.send("window:minimize"),
@@ -25,6 +26,6 @@ contextBridge.exposeInMainWorld("dialog", dialog);
 
 const scanner = {
   paths: () => ipcRenderer.invoke("games:paths"),
-  steam: () => ipcRenderer.send("games:steam"),
+  games: (paths: LauncherPaths) => ipcRenderer.invoke("games:all", paths),
 };
 contextBridge.exposeInMainWorld("scanner", scanner);

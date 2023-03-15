@@ -2,15 +2,17 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { enumerateValues, HKEY } from "registry-js";
 
-import { Directory, Game } from "../types";
+import { Directory } from "../types";
+import { Game } from "@shared/types";
 
 export default class Steam implements Directory<Game> {
   name: string;
-  private path?: string;
+  path?: string;
 
-  constructor() {
+  constructor(path?: string) {
     this.name = "steam";
-    this.getPath();
+    if (path) this.path = path;
+    else this.getPath();
   }
 
   getPath(): string | undefined {
