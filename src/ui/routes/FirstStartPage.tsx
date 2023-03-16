@@ -27,31 +27,43 @@ export default function FirstStartPage() {
     setStep((step) => --step);
   };
 
-  const handleEnd = () => {
+  const handleSkip = () => {
+    setIsFirstStart(false);
+  };
+
+  const handleFinish = () => {
     setIsFirstStart(false);
   };
 
   return (
     <div className="flex h-full flex-col items-center justify-center text-center text-xl">
-      <div className="relative rounded-xl border-4 border-primary-7 bg-primary-3 px-16 py-10 shadow-2xl">
+      <div className="relative max-h-[80%] rounded-xl border-4 border-primary-7 bg-primary-3 px-16 py-10 shadow-2xl">
         <div className="absolute -top-2 -left-2 -z-50 h-[calc(100%+1rem)] w-[calc(100%+1rem)] rounded-xl border-8 border-primary-7 blur-md"></div>
-        {steps[step]}
-        <div className="mt-8 flex items-center justify-between gap-4">
-          {step === 0 ? (
-            <Button color="error" onClick={handleEnd}>
-              Skip
-            </Button>
-          ) : (
-            <Button color="primary" important onClick={handleBackStep}>
-              Back
-            </Button>
-          )}
-          <div className="flex-1">
-            <Stepper step={step} />
+        <div className="flex h-full flex-col">
+          {steps[step]}
+          <div className="mt-8 flex items-center justify-between gap-4">
+            {step <= 0 ? (
+              <Button color="error" onClick={handleSkip}>
+                Skip
+              </Button>
+            ) : (
+              <Button color="primary" important onClick={handleBackStep}>
+                Back
+              </Button>
+            )}
+            <div className="flex-1">
+              <Stepper step={step} />
+            </div>
+            {step >= steps.length - 1 ? (
+              <Button color="primary" important onClick={handleFinish}>
+                Finish
+              </Button>
+            ) : (
+              <Button color="primary" important onClick={handleNextStep}>
+                Continue
+              </Button>
+            )}
           </div>
-          <Button color="primary" important onClick={handleNextStep}>
-            Continue
-          </Button>
         </div>
       </div>
     </div>
