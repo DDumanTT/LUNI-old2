@@ -1,14 +1,14 @@
 import { InputHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import * as Label from "@radix-ui/react-label";
-import Icon from "./Icon";
+import { ReactSVG } from "react-svg";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   label?: string;
   before?: ReactNode;
   after?: ReactNode;
-  icon?: ReactNode;
+  icon?: string;
   onCancel?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -47,9 +47,13 @@ export default function Input(props: InputProps) {
         {before}
         <div className="relative w-full">
           {icon && (
-            <div className="absolute left-5 top-1/2 aspect-square h-full -translate-x-1/2 -translate-y-1/2 p-2">
-              {icon}
-            </div>
+            <ReactSVG
+              src={icon}
+              // className="absolute left-5 top-1/2 aspect-square h-full -translate-x-1/2 -translate-y-1/2 p-2"
+            />
+            // <div className="absolute left-5 top-1/2 aspect-square h-full -translate-x-1/2 -translate-y-1/2 p-2">
+            //   {icon}
+            // </div>
           )}
           <input
             className={inputClassName}

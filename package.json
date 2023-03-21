@@ -25,7 +25,6 @@
     "@electron-forge/maker-zip": "^6.0.5",
     "@electron-forge/plugin-webpack": "^6.0.5",
     "@radix-ui/colors": "^0.1.8",
-    "@svgr/webpack": "^6.5.1",
     "@tailwindcss/forms": "^0.5.3",
     "@timfish/forge-externals-plugin": "^0.2.0",
     "@types/react": "^18.0.28",
@@ -65,6 +64,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
+    "react-svg": "^16.1.6",
     "registry-js": "^1.15.1"
   }
 }

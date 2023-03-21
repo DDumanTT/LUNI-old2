@@ -3,10 +3,6 @@ import { ReactNode, useEffect, useState } from "react";
 
 import Input from "../Input";
 import { launcherPathsAtom } from "../../atoms";
-import SteamLogo from "../../assets/logos/steam_logo.svg";
-import EpicLogo from "../../assets/logos/epic_logo.svg";
-import EaLogo from "../../assets/logos/ea_logo.svg";
-import UbisoftLogo from "../../assets/logos/ubisoft_logo.svg";
 
 const launcherNamesMap: Record<string, string> = {
   steam: "Steam",
@@ -15,14 +11,18 @@ const launcherNamesMap: Record<string, string> = {
   ubisoft: "Ubisoft",
 };
 
-const launcherIconsMap: Record<string, ReactNode> = {
-  steam: <SteamLogo className="aspect-square h-full w-full fill-primary-12" />,
-  epic: <EpicLogo className="aspect-square h-full w-full fill-primary-12" />,
-  ea: <EaLogo className="aspect-square h-full w-full fill-primary-12" />,
-  ubisoft: (
-    <UbisoftLogo className="aspect-square h-full w-full fill-primary-12" />
-  ),
+const launcherIconsMap: Record<string, string> = {
+  steam: "../../assets/logos/steam_logo.svg",
+  epic: "../../assets/logos/epic_logo.svg",
+  ea: "../../assets/logos/ea_logo.svg",
+  ubisoft: "../../assets/logos/ubisoft_logo.svg",
 };
+// steam: <SteamLogo className="aspect-square h-full w-full fill-primary-12" />,
+// epic: <EpicLogo className="aspect-square h-full w-full fill-primary-12" />,
+// ea: <EaLogo className="aspect-square h-full w-full fill-primary-12" />,
+// ubisoft: (
+//   <UbisoftLogo className="aspect-square h-full w-full fill-primary-12" />
+// ),
 
 export default function LauncherPathsForm() {
   const [fetchingPaths, setFetchingPaths] = useState(true);

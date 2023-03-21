@@ -1,13 +1,9 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
 import { useAtom } from "jotai";
+import { ReactSVG } from "react-svg";
 
 import { Game } from "@shared/types";
 import { launcherPathsAtom } from "../../atoms";
-
-import SteamLogo from "../../assets/logos/steam_logo.svg";
-import EpicLogo from "../../assets/logos/epic_logo.svg";
-import EaLogo from "../../assets/logos/ea_logo.svg";
-import UbisoftLogo from "../../assets/logos/ubisoft_logo.svg";
 
 interface GameListItem extends Game {
   selected: boolean;
@@ -20,11 +16,11 @@ interface GameRowProps {
   selected: boolean;
 }
 
-const launcherIconsMap: Record<string, ReactNode> = {
-  steam: <SteamLogo className="aspect-square h-8 w-8 fill-primary-12" />,
-  epic: <EpicLogo className="aspect-square h-8 w-8 fill-primary-12" />,
-  ea: <EaLogo className="aspect-square h-8 w-8 fill-primary-12" />,
-  ubisoft: <UbisoftLogo className="aspect-square h-8 w-8 fill-primary-12" />,
+const launcherIconsMap: Record<string, string> = {
+  steam: "/steam_logo.svg",
+  epic: "../../assets/logos/epic_logo.svg",
+  ea: "../../assets/logos/ea_logo.svg",
+  ubisoft: "../../assets/logos/ubisoft_logo.svg",
 };
 
 export default function GameSelection(props: GameSelectProps) {
@@ -78,7 +74,9 @@ export default function GameSelection(props: GameSelectProps) {
                 key={`${game.launcher}-${game.id}`}
                 onClick={() => handleToggle(game)}
               >
-                <td className="p-2">{launcherIconsMap[game.launcher]}</td>
+                <td className="p-2">
+                  <ReactSVG src={launcherIconsMap[game.launcher]} />
+                </td>
                 <td className="pl-2 text-left">{game.name}</td>
               </tr>
             ))}
